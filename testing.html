@@ -131,7 +131,7 @@
     <body>
     <div class="viewer-container" id="viewer">
       <div class="image-wrapper" id="imageWrapper" style="transform: translateX(-50%) translateY(0);">
-        <img src="img/001.jpg" alt="Zoomed Moveable Image" class="main-image" id="mainImage" draggable="false" />
+        <img src="001.jpg" alt="Zoomed Moveable Image" class="main-image" id="mainImage" draggable="false" />
       </div>
     </div>
 
@@ -259,21 +259,21 @@
 
       // Add this object to store hotspots for each scene
       const sceneHotspots = {
-        'img/001.jpg': [
+        '001.jpg': [
           {
             id: '▲',
             top: '75%',
             left: '55%',
-            targetScene: 'img/02.jpg',
+            targetScene: '02.jpg',
             tooltip: 'Go to Scene 2'
           }
         ],
-        'img/02.jpg': [
+        '02.jpg': [
           {
             id: 1,
             top: '60%',
             left: '18%',
-            targetScene: 'img/03.jpg',
+            targetScene: '03.jpg',
             tooltip: 'Go to Scene 3'
           },
 
@@ -281,34 +281,34 @@
             id: 1,
             top: '80%',
             left: '10%',
-            targetScene: 'img/001.jpg',
+            targetScene: '001.jpg',
             tooltip: 'Go to Scene 3'
           }
         ],
-        'img/03.jpg': [
+        '03.jpg': [
           {
             id: 1,
             top: '50%',
             left: '50%',
-            targetScene: 'img/04.jpg',
+            targetScene: '04.jpg',
             tooltip: 'Back to Scene 1'
           }
         ],
-          'img/04.jpg': [
+          '04.jpg': [
           {
             id: 1,
             top: '50%',
             left: '50%',
-            targetScene: 'img/05.jpg',
+            targetScene: '05.jpg',
             tooltip: 'Back to Scene 1'
           }
             ],
-          'img/05.jpg': [
+          '05.jpg': [
           {
             id: 1,
             top: '50%',
             left: '50%',
-            targetScene: 'img/06.jpg',
+            targetScene: '06.jpg',
             tooltip: 'Back to Scene 1'
           }
         ]
@@ -378,7 +378,7 @@
 
       // Initialize hotspots for the first scene when the page loads
       window.addEventListener('load', () => {
-        updateHotspots('img/001.jpg');
+        updateHotspots('001.jpg');
       });
 
     </script>
