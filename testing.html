@@ -1,0 +1,386 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Moveable Zoomed Image with Hotspots - Landscape</title>
+    <style>
+      /* Reset */
+      * {
+        box-sizing: border-box;
+      }
+      body, html {
+        margin: 0; padding: 0;
+        background: #121212;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      /* Add these to your existing styles */
+      .image-wrapper {
+        /* Add transition property to existing .image-wrapper */
+        transition: opacity 0.5s ease;
+      }
+
+      .image-wrapper.fade-out {
+        opacity: 0;
+      }
+
+      .image-wrapper.fade-in {
+        opacity: 1;
+      }
+
+      .viewer-container {
+        width: 700px;
+        max-width: 100vw;
+        height: 350px;
+        max-height: 100vh;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        overflow: hidden;
+        position: relative;
+        user-select: none;
+        touch-action: none;
+      }
+
+      .image-wrapper {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        width: auto;
+        transform: translateX(-50%) translateY(0);
+        will-change: transform;
+        cursor: grab;
+      }
+
+      .image-wrapper.dragging {
+        cursor: grabbing;
+      }
+
+      img.main-image {
+        height: 100%;
+        width: auto;
+        user-select: none;
+        pointer-events: none;
+        -webkit-user-drag: none;
+        display: block;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+        transform: scale(1.2);
+        transform-origin: center center;
+      }
+
+      /* Hotspots styles */
+      .hotspot {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: gray;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(255, 69, 0, 0.8);
+        border: 2px solid #fff;
+        cursor: pointer;    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        user-select: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .hotspot:hover,
+      .hotspot:focus {
+        background: green;
+        box-shadow: 0 0 12px #ff4500;
+        outline: none;
+      }
+
+      /* Tooltip */
+      .hotspot .tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0,0,0,0.85);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 14px;
+        white-space: nowrap;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+      }
+
+      .hotspot:hover .tooltip,
+      .hotspot:focus .tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+
+    </style>
+    </head>
+    <body>
+    <div class="viewer-container" id="viewer">
+      <div class="image-wrapper" id="imageWrapper" style="transform: translateX(-50%) translateY(0);">
+        <img src="img/001.jpg" alt="Zoomed Moveable Image" class="main-image" id="mainImage" draggable="false" />
+      </div>
+    </div>
+
+    <script>
+      // Define changeScene globally first
+      function changeScene(imageSrc) {
+        const mainImage = document.getElementById('mainImage');
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        // Update the image source
+        mainImage.src = imageSrc;
+
+        // Reset drag position immediately
+        imageWrapper.style.transform = `translateY(0) translateX(-50%)`;
+        
+        // Handle the new image load
+        mainImage.onload = () => {
+          const scale = 1.2;
+          const imageWidth = mainImage.naturalWidth * (mainImage.clientHeight / mainImage.naturalHeight) * scale;
+        };
+      }
+
+      // Main viewer functionality
+      (function() {
+        const viewer = document.getElementById('viewer');
+        const imageWrapper = document.getElementById('imageWrapper');
+        const mainImage = document.getElementById('mainImage');
+
+        let containerWidth = viewer.clientWidth;
+        let imageWidth = 0;
+
+        let isDragging = false;
+        let dragStartX = 0;
+        let currentTranslateX = 0;  // starts centered at 0 offset
+        let prevTranslateX = 0;
+
+        // On image load, calculate scaled image width (accounting for scale(1.2))
+        mainImage.addEventListener('load', () => {
+          // naturalWidth * (displayHeight / naturalHeight) * scale
+          const scale = 1.2;
+          imageWidth = mainImage.naturalWidth * (mainImage.clientHeight / mainImage.naturalHeight) * scale;
+          setTranslateX(0);
+        });
+
+        function constrainTranslate(offsetX) {
+          if (imageWidth <= containerWidth){
+            return 0;
+          }
+          const maxOffset = (imageWidth - containerWidth) / 2;
+          return Math.min(maxOffset, Math.max(-maxOffset, offsetX));
+        }
+
+        function setTranslateX(offsetX) {
+          offsetX = constrainTranslate(offsetX);
+          currentTranslateX = offsetX;
+          imageWrapper.style.transform = `translateY(0) translateX(calc(-50% + ${offsetX}px))`;
+        }
+
+        function onDragStart(event) {
+          isDragging = true;
+          dragStartX = event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
+          prevTranslateX = currentTranslateX;
+          imageWrapper.classList.add('dragging');
+        }
+
+        function onDragMove(event) {
+          if (!isDragging) return;
+          const currentX = event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
+          const deltaX = currentX - dragStartX;
+          setTranslateX(prevTranslateX + deltaX);
+        }
+
+        function onDragEnd(event) {
+          if (!isDragging) return;
+          isDragging = false;
+          imageWrapper.classList.remove('dragging');
+        }
+
+        viewer.addEventListener('mousedown', onDragStart);
+        window.addEventListener('mousemove', onDragMove);
+        window.addEventListener('mouseup', onDragEnd);
+
+        viewer.addEventListener('touchstart', onDragStart, {passive: true});
+        window.addEventListener('touchmove', onDragMove, {passive: true});
+        window.addEventListener('touchend', onDragEnd);
+
+        window.addEventListener('resize', () => {
+          containerWidth = viewer.clientWidth;
+          setTranslateX(currentTranslateX);
+        });
+      })();
+
+      function changeScene(imageSrc) {
+        const mainImage = document.getElementById('mainImage');
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        // Add fade out effect
+        imageWrapper.classList.add('fade-out');
+        
+        setTimeout(() => {
+          // Update the image source
+          mainImage.src = imageSrc;
+          
+          // Reset drag position
+          imageWrapper.style.transform = `translateY(0) translateX(-50%)`;
+          
+          // Update hotspots for the new scene
+          updateHotspots(imageSrc);
+          
+          // Handle the new image load
+          mainImage.onload = () => {
+            const scale = 1.2;
+            const imageWidth = mainImage.naturalWidth * (mainImage.clientHeight / mainImage.naturalHeight) * scale;
+            
+            // Fade back in
+            imageWrapper.classList.remove('fade-out');
+            imageWrapper.classList.add('fade-in');
+            
+            setTimeout(() => {
+              imageWrapper.classList.remove('fade-in');
+            }, 500);
+          };
+        }, 500);
+      }
+
+      // Add this object to store hotspots for each scene
+      const sceneHotspots = {
+        'img/001.jpg': [
+          {
+            id: '▲',
+            top: '75%',
+            left: '55%',
+            targetScene: 'img/02.jpg',
+            tooltip: 'Go to Scene 2'
+          }
+        ],
+        'img/02.jpg': [
+          {
+            id: 1,
+            top: '60%',
+            left: '18%',
+            targetScene: 'img/03.jpg',
+            tooltip: 'Go to Scene 3'
+          },
+
+          {
+            id: 1,
+            top: '80%',
+            left: '10%',
+            targetScene: 'img/001.jpg',
+            tooltip: 'Go to Scene 3'
+          }
+        ],
+        'img/03.jpg': [
+          {
+            id: 1,
+            top: '50%',
+            left: '50%',
+            targetScene: 'img/04.jpg',
+            tooltip: 'Back to Scene 1'
+          }
+        ],
+          'img/04.jpg': [
+          {
+            id: 1,
+            top: '50%',
+            left: '50%',
+            targetScene: 'img/05.jpg',
+            tooltip: 'Back to Scene 1'
+          }
+            ],
+          'img/05.jpg': [
+          {
+            id: 1,
+            top: '50%',
+            left: '50%',
+            targetScene: 'img/06.jpg',
+            tooltip: 'Back to Scene 1'
+          }
+        ]
+      };
+
+      // Add this function to update hotspots
+      function updateHotspots(currentScene) {
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        // Remove all existing hotspots
+        const existingHotspots = imageWrapper.querySelectorAll('.hotspot');
+        existingHotspots.forEach(hotspot => hotspot.remove());
+        
+        // Add new hotspots for current scene
+        const hotspotsForScene = sceneHotspots[currentScene] || [];
+        hotspotsForScene.forEach(hotspot => {
+          const button = document.createElement('button');
+          button.className = 'hotspot';
+          button.style.top = hotspot.top;
+          button.style.left = hotspot.left;
+          button.onclick = () => changeScene(hotspot.targetScene);
+          button.setAttribute('tabindex', '0');
+          button.setAttribute('aria-label', hotspot.tooltip);
+          
+          button.innerHTML = `
+            ${hotspot.id}
+            <div class="tooltip">${hotspot.tooltip}</div>
+          `;
+          
+          imageWrapper.appendChild(button);
+        });
+      }
+
+      // Modify the changeScene function
+      function changeScene(imageSrc) {
+        const mainImage = document.getElementById('mainImage');
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        // Add fade out effect
+        imageWrapper.classList.add('fade-out');
+        
+        setTimeout(() => {
+          // Update the image source
+          mainImage.src = imageSrc;
+          
+          // Reset drag position
+          imageWrapper.style.transform = `translateY(0) translateX(-50%)`;
+          
+          // Update hotspots for the new scene
+          updateHotspots(imageSrc);
+          
+          // Handle the new image load
+          mainImage.onload = () => {
+            const scale = 1.2;
+            const imageWidth = mainImage.naturalWidth * (mainImage.clientHeight / mainImage.naturalHeight) * scale;
+            
+            // Fade back in
+            imageWrapper.classList.remove('fade-out');
+            imageWrapper.classList.add('fade-in');
+            
+            setTimeout(() => {
+              imageWrapper.classList.remove('fade-in');
+            }, 500);
+          };
+        }, 500);
+      }
+
+      // Initialize hotspots for the first scene when the page loads
+      window.addEventListener('load', () => {
+        updateHotspots('img/001.jpg');
+      });
+
+    </script>
+    </body>
+    </html>
