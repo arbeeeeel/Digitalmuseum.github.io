@@ -1,5 +1,4 @@
 
-
   * {
       margin: 0;
       padding: 0;
@@ -493,29 +492,110 @@ body::before {
     padding-bottom: 5rem;
 }
 
-/* Your original CSS here (unchanged) */
-/* ... */
+/* Make large fixed widths responsive */
+.hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
+  max-width: 90vw; /* prevent overflow on small screens */
+  width: 50rem; /* keep your fixed width but constrain */
+  margin-left: auto;
+  margin-right: auto;
+}
 
-/* Add this at the bottom of your CSS file for responsiveness */
+/* For navigation overflow on small screens */
+.nav-links {
+  max-width: 80vw;
+}
 
-@media (max-width: 1024px) {
+/* Make logo scale down on smaller devices */
+.logo img {
+  max-width: 3.5rem;
+  max-height: 3.5rem;
+}
+
+/* Responsive banner text */
+.banner-text {
+  max-width: 95%;
+  padding-top: 4rem;
+}
+
+.banner-text h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+}
+
+.banner-text p {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+}
+
+/* Responsive nav font size */
+.nav-links a {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+/* Responsive container for OSN section */
+.osn1-container {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.osn1-image {
+  max-width: 100%;
+  flex: none;
+  transform: translateY(3rem); /* reduce translate on small */
+}
+
+/* Smaller font size and margins for paragraphs */
+.overview-text p,
+.OSN1,
+.OJC1,
+.DPRO1,
+.OC1,
+.OCC1,
+.HS1,
+.HS2 {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  margin: 1rem 1rem 3rem 1rem;
+  max-width: 100%;
+  transform: translateY(2rem);
+}
+
+/* Footer text scaling */
+footer {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Smaller padding for nav on mobile */
+@media (max-width: 600px) {
+  nav {
+    padding: 0.5rem 1rem;
+  }
   .nav-links li {
-    margin-left: 1rem; /* slightly smaller spacing */
+    margin-left: 1rem;
   }
-  
+  .year1, .year2, .year3, .year4, .year5, .year6 {
+    font-size: 1.6rem;
+  }
+  .hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
+    width: 100%;
+  }
+  .osn1-image img {
+    transform: translateY(2rem);
+  }
+  .osn1-container {
+    gap: 0.5rem;
+  }
+}
+
+/* For very small devices */
+@media (max-width: 400px) {
   .banner-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .banner-text p {
-    font-size: 1.1rem;
-  }
-
-  .overview, .OSN {
     font-size: 1.5rem;
-    padding-left: 1.5rem;
   }
-
+  .nav-links a {
+    font-size: 1rem;
+  }
+  .osn1-image {
+    max-width: 100%;
+  }
+  .banner-text p,
   .overview-text p,
   .OSN1,
   .OJC1,
@@ -525,109 +605,6 @@ body::before {
   .HS1,
   .HS2 {
     font-size: 0.9rem;
-    max-width: 90%;
-    margin: 1rem auto;
-    transform: translateY(0); /* reduce vertical shifts on smaller screens */
-  }
-
-  .osn1-container {
-    flex-direction: column;
-    gap: 1rem;
-    margin: 1rem auto;
-  }
-
-  .osn1-image {
-    max-width: 100%;
-    flex: none;
-    transform: translateY(0);
-  }
-
-  .osn1-image img {
-    transform: translateY(0);
-  }
-
-  .hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
-    width: 90%;
-  }
-
-  .hs2-container {
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 1rem;
-  }
-
-  .image-collage {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .base-img, .overlay-img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    border: none;
-    box-shadow: none;
-    opacity: 1;
-  }
-
-  nav {
-    padding: 0.5rem 1rem;
-  }
-
-  .logo img {
-    width: 3rem;
-    height: 3rem;
-    margin-left: 0.5rem;
-  }
-
-  .nav-links {
-    margin-right: 0.5rem;
-    font-size: 1rem;
-  }
-
-  .nav-links a {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .banner-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .banner-text p {
-    font-size: 1rem;
-  }
-
-  .overview, .OSN {
-    font-size: 1.2rem;
-    padding-left: 1rem;
-  }
-
-  .year1, .year2, .year3, .year4, .year5, .year6 {
-    font-size: 1.5rem;
-  }
-
-  .nav-links li {
-    margin-left: 0.7rem;
-  }
-
-  nav {
-    padding: 0.5rem;
-  }
-
-  .logo img {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-left: 0.3rem;
-  }
-
-  .nav-links a {
-    font-size: 0.9rem;
+    margin: 1rem;
   }
 }
