@@ -1,27 +1,28 @@
-/* Base reset and global styles */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Base styles */
 html, body {
   height: 100%;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
   scroll-behavior: smooth;
+  font-family: 'Playfair Display', serif;
+  background: #121212;
+  color: #E0E0E0;
+  overflow-x: hidden;
 }
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #121212;
   position: relative;
-  color: #E0E0E0;
-  overflow-x: hidden;
-  font-family: 'Playfair Display', serif;
 }
 
 body::before {
@@ -34,11 +35,10 @@ body::before {
   z-index: 0;
 }
 
-/* Navigation bar */
+/* Nav */
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -46,7 +46,7 @@ nav {
   background-color: transparent;
   transition: background-color 0.3s ease;
   z-index: 1000;
-  padding: 0.8rem 1rem; /* add horizontal padding */
+  padding: 0.8rem 1rem;
 }
 
 nav.scrolled {
@@ -57,11 +57,9 @@ nav.scrolled {
   width: 4rem;
   height: 4rem;
   margin-left: 1rem;
-  max-width: 100%;
-  height: auto;
+  flex-shrink: 0;
 }
 
-/* Nav links - keep horizontal, allow horizontal scroll on small screens */
 .nav-links {
   list-style: none;
   display: flex;
@@ -69,7 +67,6 @@ nav.scrolled {
   white-space: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
-  flex-wrap: nowrap; /* prevent wrapping to vertical */
 }
 
 .nav-links::-webkit-scrollbar {
@@ -78,25 +75,38 @@ nav.scrolled {
 
 .nav-links li {
   margin-left: 2rem;
-  flex-shrink: 0; /* prevent shrinking */
+  flex-shrink: 0;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  font-size: clamp(1rem, 1.3vw, 1.3rem); /* fluid font size */
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus {
   color: red;
+  outline: none;
 }
 
-/* Top Banner */
+/* Keep nav horizontal on all screen sizes, allow horizontal scroll if too narrow */
+@media (max-width: 480px) {
+  .nav-links {
+    margin-right: 0.5rem;
+  }
+  .nav-links li {
+    margin-left: 1rem;
+  }
+}
+
+/* Top banner */
 .top-banner {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* better than fixed height */
+  height: 100vh;
   background-image: url('museum.png');
   background-size: cover;
   background-position: center;
@@ -106,8 +116,7 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 1rem; /* padding so content doesn't touch edges */
-  box-sizing: border-box;
+  padding-top: 4.8rem; /* space for fixed nav */
 }
 
 .overlay {
@@ -122,56 +131,91 @@ nav.scrolled {
   color: white;
   text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
   padding: 1rem;
-  padding-top: 6rem; /* space for fixed nav */
-  max-width: 80%;
+  max-width: 80vw;
   position: relative;
-  font-family: 'Playfair Display', serif;
   z-index: 2;
-  margin: 0 auto;
+  font-family: 'Playfair Display', serif;
 }
 
 .banner-text h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   margin: 0.5rem 0;
-  font-family: 'Playfair Display', serif;
-  line-height: 1.1;
 }
 
 .banner-text p {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
   margin-top: 1rem;
-  font-family: 'Playfair Display', serif;
-  line-height: 1.5;
 }
 
-/* Overview Section */
-.overview {
-  color: whitesmoke;
+/* Overview and other sections with max width and padding */
+.overview,
+.OSN,
+.ACHVMNTS {
   background-color: rgba(0, 128, 0, 0.5);
-  padding: 1.5rem 2.5rem;
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  margin-top: 0rem;
-  max-width: 100%;
-  box-sizing: border-box;
+  color: whitesmoke;
+  padding: 1.5rem 2rem;
+  max-width: 90vw;
+  margin: 2rem auto 0 auto;
+  border-radius: 5px;
+  font-size: clamp(1rem, 2vw, 2rem);
+  opacity: 1;
 }
 
-.overview-text p {
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  line-height: 1.8rem;
-  max-width: 95%;
-  margin: 1.25rem 2rem;
-  transform: translateY(2rem);
-  text-align: justify;
+/* Text blocks with justified text */
+.overview-text p,
+.OSN1,
+.OJC1,
+.DPRO1,
+.OC1,
+.OCC1,
+.HS1,
+.HS2 {
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  max-width: 100%;
+  margin: 1rem 0;
   color: white;
   opacity: 0.7;
+  text-align: justify;
 }
 
-/* Main Content Sections: apply max-width and padding */
-main {
-  flex: 1 0 auto;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+/* Flex container for images and text that stack on small devices */
+.osn1-container,
+.hs2-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem auto;
+  max-width: 90vw;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.osn1-image {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.osn1-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Horizontal rules with responsive widths */
+.hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
+  border: 2px solid green;
+  width: 90vw;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+/* Year titles centered with responsive font size */
+.year1, .year2, .year3, .year4, .year5, .year6 {
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: bolder;
+  margin-top: 2rem;
 }
 
 /* Footer */
@@ -180,178 +224,25 @@ footer {
   color: black;
   padding: 2rem 1rem;
   text-align: center;
-  flex-shrink: 0;
   box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.credits {
-  max-width: 60rem;
-  margin: 0 auto;
-}
-
-.IT {
-  margin-top: 0.05rem;
-  font-style: italic;
-}
-
-/* Example for sections with text and images */
-.osn1-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin: 1.5rem 2rem;
-  box-sizing: border-box;
-  justify-content: center; /* center on small screens */
-}
-
-.osn1-image {
-  flex: 1 1 18.75rem; /* 300px */
-  max-width: 25rem;
-  min-width: 180px;
-}
-
-.osn1-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 5px;
-  transform: translateY(7rem);
-}
-
-/* Make sure text sections max width and margins adapt */
-.OSN1, .OJC1, .DPRO1, .OC1, .OCC1, .HS1, .HS2 {
-  font-size: clamp(0.9rem, 1.5vw, 1rem);
-  line-height: 1.8rem;
-  max-width: 95%;
-  margin: 1.25rem 2rem 8rem 2rem;
-  transform: translateY(5rem);
-  text-align: justify;
-  color: white;
-  opacity: 0.7;
-  box-sizing: border-box;
-}
-
-/* Headings sizes with clamp for fluid scaling */
-.year1, .year2, .year3, .year4, .year5, .year6 {
-  text-align: center;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: bolder;
-}
-
-/* Horizontal rules */
-.hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
-  border-width: 2px;
-  border-style: solid;
-  width: 90%;
-  max-width: 50rem;
-  margin: auto;
-  position: relative;
-  bottom: -3rem;
-}
-
-/* Flex containers for sections with multiple columns */
-.hs2-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 4rem; /* reduced gap for smaller screens */
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.image-collage {
-  position: relative;
-  width: 200px;
-  height: 200px;
   flex-shrink: 0;
 }
 
-/* Responsive images */
-.base-img, .overlay-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  position: absolute;
+/* Ensure main grows properly */
+main {
+  flex: 1 0 auto;
 }
 
-.base-img {
-  top: 2rem;
-  left: 2rem;
-}
-
-.overlay-img {
-  bottom: -10rem;
-  right: -10rem;
-  opacity: 0.85;
-  border: 2px solid white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Utility spacing */
+/* Utility classes */
 .section-spacing {
   margin-bottom: 6rem;
 }
 
-/* Year section styling */
-.year-section {
-  background-color: transparent;
-  padding: 10px 0 5rem 0;
-  border-radius: 5px;
+/* Scrollbar hidden for nav on all browsers */
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
-
-/* Media query for small screens */
-@media (max-width: 768px) {
-  .banner-text {
-    max-width: 95%;
-    padding-top: 5rem;
-  }
-
-  .osn1-container {
-    flex-direction: column;
-    gap: 2rem;
-    margin: 1rem;
-  }
-
-  .nav-links li {
-    margin-left: 1rem;
-  }
-
-  /* Keep nav horizontal but smaller font */
-  .nav-links a {
-    font-size: 1rem;
-    padding: 0 0.25rem;
-  }
-
-  /* Reduce transforms for small screen */
-  .OSN1, .OJC1, .DPRO1, .OC1, .OCC1, .HS1, .HS2 {
-    transform: none;
-    margin: 1rem;
-  }
-
-  .osn1-image {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-links a {
-    font-size: 0.9rem;
-  }
-
-  .banner-text h1 {
-    font-size: 2rem;
-  }
-
-  .banner-text p {
-    font-size: 1rem;
-  }
-
-  .overview {
-    font-size: 1.3rem;
-    padding: 1rem 1rem;
-  }
+.nav-links {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
