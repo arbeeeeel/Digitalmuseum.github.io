@@ -1,29 +1,28 @@
-make this responsive and i dont want the nav vertical
+/* Base reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+html, body {
+  height: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  scroll-behavior: smooth;
+}
 
-    html, body {
-      height: 100%;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background: #121212;
-      position: relative;
-      color: #E0E0E0;
-      overflow-x: hidden;
-      font-family: 'Playfair Display', serif;
-    }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #121212;
+  position: relative;
+  color: #E0E0E0;
+  overflow-x: hidden;
+  font-family: 'Playfair Display', serif;
+}
 
 body::before {
   content: "";
@@ -35,364 +34,234 @@ body::before {
   z-index: 0;
 }
 
+/* Navigation bar */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  z-index: 1000;
+  padding: 0.8rem 1rem; /* add horizontal padding */
+}
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: transparent;
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      padding: 0.8rem;
-    }
+nav.scrolled {
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
-    nav.scrolled {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
+.logo img {
+  width: 4rem;
+  height: 4rem;
+  margin-left: 1rem;
+  max-width: 100%;
+  height: auto;
+}
 
-    .logo img {
-      width: 4rem;
-      height: 4rem;
-      margin-left: 1rem;
-    }
+/* Nav links - keep horizontal, allow horizontal scroll on small screens */
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin-right: 1rem;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-wrap: nowrap; /* prevent wrapping to vertical */
+}
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      margin-right: 1rem;
-      white-space: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
 
-    .nav-links::-webkit-scrollbar {
-      display: none;
-    }
+.nav-links li {
+  margin-left: 2rem;
+  flex-shrink: 0; /* prevent shrinking */
+}
 
-    .nav-links li {
-      margin-left: 2rem;
-    }
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: clamp(1rem, 1.3vw, 1.3rem); /* fluid font size */
+}
 
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.3rem;
-    }
+.nav-links a:hover {
+  color: red;
+}
 
-    .nav-links a:hover {
-      color: red;
-    }
+/* Top Banner */
+.top-banner {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* better than fixed height */
+  background-image: url('museum.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1rem; /* padding so content doesn't touch edges */
+  box-sizing: border-box;
+}
 
-    .top-banner {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background-image: url('museum.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
 
-    .overlay {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1;
-    }
+.banner-text {
+  color: white;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+  padding: 1rem;
+  padding-top: 6rem; /* space for fixed nav */
+  max-width: 80%;
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  z-index: 2;
+  margin: 0 auto;
+}
 
-    .banner-text {
-      color: white;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
-      padding: 1rem;
-      padding-top: 6rem; /* space for fixed nav */
-      max-width: 80%;
-      position: relative;
-      font-family: 'Playfair Display', serif;
-      z-index: 2;
-    }
+.banner-text h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0.5rem 0;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.1;
+}
 
-    .banner-text h1 {
-      font-size: 3rem;
-      margin: 0.5rem 0;
-      font-family: 'Playfair Display', serif;
-    }
+.banner-text p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin-top: 1rem;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.5;
+}
 
-    .banner-text p {
-      font-size: 1.3rem;
-      margin-top: 1rem;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .overview {
-
+/* Overview Section */
+.overview {
   color: whitesmoke;
-  opacity: 1;
-  background-color: rgba(0, 128, 0, 0.5); /* green with 30% opacity */
-  padding: 1.5rem;
-  font-size: 2rem;
+  background-color: rgba(0, 128, 0, 0.5);
+  padding: 1.5rem 2.5rem;
+  font-size: clamp(1.5rem, 2vw, 2rem);
   margin-top: 0rem;
-  padding-left: 2.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-
-    .overview-text p {
-      font-size: 1rem;
-      line-height: 1.8rem;
-      max-width: 95%;
-      margin: 1.25rem 2rem;
-      transform: translateY(2rem);
-      text-align:justify;
-      color: white;
-      opacity: 0.7;
-    }
-
-    .section-spacing {
-    margin-bottom: 6rem; /* You can adjust this value to increase/decrease spacing */
-    }
-    main {
-      flex: 1 0 auto;
-    }
-
-    footer {
-      background-color: lightgray;
-      color: black;
-      padding: 2rem 1rem;
-      text-align: center;
-      flex-shrink: 0;
-      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    }
-
-    .credits {
-      max-width: 60rem;
-      margin: 0 auto;
-    }
-
-    .IT {
-      margin-top: 0.05rem;
-      font-style: italic;
-    }
-
-/* Main Content Section */
-
-.activities-achievements {
-   margin-top: 7rem;
+.overview-text p {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.8rem;
+  max-width: 95%;
+  margin: 1.25rem 2rem;
+  transform: translateY(2rem);
+  text-align: justify;
+  color: white;
+  opacity: 0.7;
 }
 
-.ACHVMNTS {
-    text-align: center;
-    padding: 2rem;
+/* Main Content Sections: apply max-width and padding */
+main {
+  flex: 1 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.year1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
-    transform: translateY(0rem);
+/* Footer */
+footer {
+  background-color: lightgray;
+  color: black;
+  padding: 2rem 1rem;
+  text-align: center;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.hr1 {
-    border: 0.125rem solid green;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
+.credits {
+  max-width: 60rem;
+  margin: 0 auto;
 }
 
-.OSN {
-    color: whitesmoke;
-    opacity: 1;
-    background-color: rgba(0, 128, 0, 0.5);
-    padding: 1.5rem;
-    font-size: 2rem;
-    margin-top: 0rem;
-    padding-left: 2.5rem;
-    transform: translateY(3rem);
+.IT {
+  margin-top: 0.05rem;
+  font-style: italic;
 }
 
-.OSN1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    flex: 2 1 31.25rem; /* 500px */
-    color: white;
-    opacity: 0.7;
-}
-
+/* Example for sections with text and images */
 .osn1-container {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin: 1.5rem 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin: 1.5rem 2rem;
+  box-sizing: border-box;
+  justify-content: center; /* center on small screens */
 }
 
 .osn1-image {
-    flex: 1 1 18.75rem; /* 300px */
-    max-width: 25rem; /* 400px */
+  flex: 1 1 18.75rem; /* 300px */
+  max-width: 25rem;
+  min-width: 180px;
 }
 
 .osn1-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 0.3125rem; /* 5px */
-    transform: translateY(7rem);
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transform: translateY(7rem);
 }
 
-.year2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
+/* Make sure text sections max width and margins adapt */
+.OSN1, .OJC1, .DPRO1, .OC1, .OCC1, .HS1, .HS2 {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.8rem;
+  max-width: 95%;
+  margin: 1.25rem 2rem 8rem 2rem;
+  transform: translateY(5rem);
+  text-align: justify;
+  color: white;
+  opacity: 0.7;
+  box-sizing: border-box;
 }
 
-.hr2 {
-    border: 0.125rem solid gold;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
+/* Headings sizes with clamp for fluid scaling */
+.year1, .year2, .year3, .year4, .year5, .year6 {
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: bolder;
 }
 
-.OJC {
-    position: relative;
-    top: 3.75rem; /* 60px */
-    text-align: right;
-    font-size: 2rem;
-    background-color: gold;
-    padding: 0.5rem;
-    letter-spacing: 0.1rem;
-    font-weight: bold;
+/* Horizontal rules */
+.hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
+  border-width: 2px;
+  border-style: solid;
+  width: 90%;
+  max-width: 50rem;
+  margin: auto;
+  position: relative;
+  bottom: -3rem;
 }
 
-.OJC1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.year3 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.hr3 {
-    border: 0.125rem solid green;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
-}
-
-.DPRO1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.year4 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.hr4 {
-    border: 0.125rem solid gold;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
-}
-
-.OC1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.year5 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-.hr5 {
-    border: 0.125rem solid green;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
-}
-
-.OCC1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.year6 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bolder;
-    transform: translateY(0rem);
-}
-
-.hr6 {
-    border: 0.125rem solid green;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
-}
-
+/* Flex containers for sections with multiple columns */
 .hs2-container {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 10rem;
+  gap: 4rem; /* reduced gap for smaller screens */
   margin-top: 2rem;
+  justify-content: center;
 }
 
-/* This puts the image collage on the left */
 .image-collage {
   position: relative;
   width: 200px;
@@ -400,109 +269,77 @@ body::before {
   flex-shrink: 0;
 }
 
-.base-img {
+/* Responsive images */
+.base-img, .overlay-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   position: absolute;
+}
+
+.base-img {
   top: 2rem;
   left: 2rem;
 }
 
 .overlay-img {
-  position: absolute;
   bottom: -10rem;
   right: -10rem;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   opacity: 0.85;
   border: 2px solid white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Keep your existing HS2 style but make it flexible */
-.HS2 {
-  flex: 1;
-  text-align: justify;
-  color: white;
-  opacity: 0.7;
-  font-size: 1rem;
-  line-height: 1.8rem;
+/* Utility spacing */
+.section-spacing {
+  margin-bottom: 6rem;
 }
 
-
-.HS1 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.HS2 {
-    font-size: 1rem;
-    line-height: 1.8rem;
-    max-width: 95%;
-    margin: 1.25rem 2rem;
-    margin-bottom: 8rem;
-    transform: translateY(5rem);
-    text-align: justify;
-    color: white;
-    opacity: 0.7;
-}
-
-.ACCRDTTNS {
-    text-align: center;
-    transform: translateY(1rem);
-}
-
-.HS3 {
-    position: relative;
-    top: 5.625rem; /* 90px */
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    line-height: 1.3rem;
-    margin-bottom: 5rem;
-    text-align: justify;
-    align-items: center;
-    text-indent: 2rem;
-    max-width: 80rem;
-    left: 1rem;
-}
-
-.hr7 {
-    border: 0.125rem solid green;
-    position: relative;
-    bottom: -3rem;
-    width: 50rem;
-    margin: auto;
-    margin-bottom: 6rem;
-}
-
-/* Year Section Styling */
+/* Year section styling */
 .year-section {
-    background-color: transparent;
-    padding: 0.625rem; /* 10px */
-    border-radius: 0.3125rem; /* 5px */
-    padding-bottom: 5rem;
+  background-color: transparent;
+  padding: 10px 0 5rem 0;
+  border-radius: 5px;
 }
 
+/* Media query for small screens */
 @media (max-width: 768px) {
-  .nav-links {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-right: 0.5rem;
+  .banner-text {
+    max-width: 95%;
+    padding-top: 5rem;
+  }
+
+  .osn1-container {
+    flex-direction: column;
+    gap: 2rem;
+    margin: 1rem;
   }
 
   .nav-links li {
     margin-left: 1rem;
+  }
+
+  /* Keep nav horizontal but smaller font */
+  .nav-links a {
+    font-size: 1rem;
+    padding: 0 0.25rem;
+  }
+
+  /* Reduce transforms for small screen */
+  .OSN1, .OJC1, .DPRO1, .OC1, .OCC1, .HS1, .HS2 {
+    transform: none;
+    margin: 1rem;
+  }
+
+  .osn1-image {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links a {
+    font-size: 0.9rem;
   }
 
   .banner-text h1 {
@@ -513,82 +350,8 @@ body::before {
     font-size: 1rem;
   }
 
-  .overview,
-  .OSN,
-  .OJC,
-  .HS3 {
-    font-size: 1.2rem;
-    padding: 1rem;
-  }
-
-  .overview-text p,
-  .OSN1,
-  .OJC1,
-  .DPRO1,
-  .OC1,
-  .OCC1,
-  .HS1,
-  .HS2 {
-    font-size: 0.9rem;
-    margin: 1rem;
-    transform: translateY(2rem);
-  }
-
-  .osn1-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .osn1-image,
-  .HS2 {
-    max-width: 100%;
-  }
-
-  .image-collage {
-    margin: 0 auto;
-    transform: scale(0.9);
-  }
-
-  .hr1, .hr2, .hr3, .hr4, .hr5, .hr6, .hr7 {
-    width: 80%;
-  }
-
-  .year1, .year2, .year3, .year4, .year5, .year6 {
-    font-size: 1.5rem;
-  }
-
-  footer {
-    font-size: 0.9rem;
-    padding: 1rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .banner-text h1 {
-    font-size: 1.5rem;
-  }
-
-  .banner-text p {
-    font-size: 0.9rem;
-  }
-
-  .nav-links a {
-    font-size: 1rem;
-  }
-
-  .year1, .year2, .year3, .year4, .year5, .year6 {
-    font-size: 1.2rem;
-  }
-
-  .overview,
-  .OSN,
-  .OJC,
-  .HS3 {
-    font-size: 1rem;
-  }
-
-  .image-collage {
-    transform: scale(0.8);
+  .overview {
+    font-size: 1.3rem;
+    padding: 1rem 1rem;
   }
 }
