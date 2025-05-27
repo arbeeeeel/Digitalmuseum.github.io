@@ -1,226 +1,309 @@
- /* Basic Reset */
- * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+/* Main Content Section */
+
+.activities-achievements {
+   margin-top: 7rem;
 }
 
-/* Apply Museo Sans font to the entire page */
-body {
-    font-family: 'Museo Sans', sans-serif; /* Apply Museo Sans */
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    transition: background 0.2s ease-in-out;}
-
-
-/* Flexbox Layout for the Navigation */
-nav {
-    display: flex;
-    justify-content: space-between; /* Spread the logo and nav links */
-    align-items: center; /* Vertically center the items */
-    position: fixed;
-    top: 0; /* Ensures the navigation bar stays at the top */
-    left: 0; /* Aligns the navigation to the left */
-    width: 100%; /* Ensure nav spans the full width of the screen */
-    background-color: transparent; /* Initially transparent */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
-    z-index: 10; /* Keeps the nav on top of other content */
-    padding: 0.8em;
+.ACHVMNTS {
+    text-align: center;
+    padding: 2rem;
 }
 
-nav.scrolled {
-    background-color: #333; /* Set a solid background color when scrolled */
+.year1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+    transform: translateY(0rem);
 }
 
-/* Other CSS (same as you provided) */
 .hr1 {
-    position: fixed;
-    top: 5.5em;
-    left: -0em;
-    width: 84.5em;
-}
-
-.logo {
-    display: flex; /* Align logo and name horizontally */
-    align-items: center; /* Vertically center the logo and name */
-    margin-left: 1em;
-    position: relative; /* Keep logo in the same place */
-}
-
-.logo img {
-    width: 4em; /* Adjust the image size */
-    height: 4em; /* Maintain the aspect ratio */
-    margin-right: .7em; /* Space between image and name */
-}
-
-.name {
-    position: fixed;
-    left: 6em;
-    top: 0em;
-    font-size: 1.2em;
-    color: darkgreen;
-}
-
-/* Navigation Links */
-.nav-links {
-    list-style: none;
-    display: flex;
-    margin-right: 4em; /* To adjust the position of the nav */
-    position: relative; /* Needed for positioning */
-}
-
-.nav-links li {
-    position: relative; /* Needed for dropdown positioning */
-    margin-left: 2em; /* Space between links */
-}
-
-.nav-links a {
-    color: green; /* Change this to any color you want, e.g., #ff0000 for red */
-    text-decoration: none;
-    font-weight: 600; /* Extra bold text */
-    font-size: 1.3em;
-    font-family: 'Museo Sans', sans-serif; /* Apply Museo Sans */
-}
-
-.nav-links a:hover {
-    color: red;
-}
-
-/* Container for the layout */
-.container {
-    display: flex; /* Enables flexbox layout */
-    justify-content: flex-start; /* Align items to the left side */
-    align-items: center; /* Vertically align items in the center */
-    padding: auto; /* Optional padding around the container */
-    background-color: transparent;
-    transform: translateY(8em) translateX(2em);
-    border: 1px solid black;
-    max-width: 80em;
-}
-
-/* Image styling */
-.image-container {
-    padding: 2em; /* Optional padding inside the image container */
-    transform: translateY(2em) translateX(-1em);
-}
-
-.image-container img {
-    width: 30em; /* Adjust the image size */
-    height: auto; /* Maintain aspect ratio */
-}
-
-/* Text styling */
-.text-container {
-    flex-grow: 1; /* Allows text container to take up available space */
-    max-width: 40em; /* Optional: limits the width of the text container */
-    margin-left: 5em; /* Adds space between the image and text */
-    transform: translateY(1em);
-    
-}
-
-.text-container h1 {
-    margin-bottom: 0.7em; /* Space below the heading */
-}
-
-.text-container p {
-    font-size: 1rem; /* Paragraph text size */
-    line-height: 1.6; /* Line height for readability */
-}
-
-/* Container for the layout of Overview */
-
-footer {
-    background: lightgray;
-    color: black;
-    padding: 3em 0;
-    transform: translateY(10em);
-}
-
-footer a {
-    color:black;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-
-.credits {
-    position: fixed;
-    top: 2em;
-    left: 30em;
-}
-
-.IT{
-    transform: translateX(3.5em);
-}
-
-/* Styling for the Slideshow Container */
-.slideshow-container {
+    border: 0.125rem solid green;
     position: relative;
-    width: 100%; /* Full width */
-    height: auto; /* Adjust based on the images */
-    right: -3em;
-    
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
 }
 
-/* Hide all slides by default */
-.slide {
-    display: none;
-    width: 100%; /* Make sure all images take the same width */
+.OSN {
+    color: whitesmoke;
+    opacity: 1;
+    background-color: rgba(0, 128, 0, 0.5);
+    padding: 1.5rem;
+    font-size: 2rem;
+    margin-top: 0rem;
+    padding-left: 2.5rem;
+    transform: translateY(3rem);
+}
+
+.OSN1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    flex: 2 1 31.25rem; /* 500px */
+    color: white;
+    opacity: 0.7;
+}
+
+.osn1-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin: 1.5rem 2rem;
+    flex-wrap: wrap;
+}
+
+.osn1-image {
+    flex: 1 1 18.75rem; /* 300px */
+    max-width: 25rem; /* 400px */
+}
+
+.osn1-image img {
+    width: 100%;
     height: auto;
-    transition: opacity 4s ease-in-out; /* Smooth fade effect */
+    border-radius: 0.3125rem; /* 5px */
+    transform: translateY(7rem);
 }
 
-/* Active class to show images */
-.fade {
-    display: block; /* Shows the image */
+.year2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
-/* Optional: Adding a fade-in effect when transitioning images */
-@keyframes fade {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.hr2 {
+    border: 0.125rem solid gold;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
 }
 
-/* For all images inside the slideshow */
-.slideshow-container img {
-    width: 80%;  /* Set width to 80% of the container */
-    height: auto; /* Maintain the aspect ratio */
+.OJC {
+    position: relative;
+    top: 3.75rem; /* 60px */
+    text-align: right;
+    font-size: 2rem;
+    background-color: gold;
+    padding: 0.5rem;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
 }
 
-/* Or, set specific width and height */
-.slideshow-container img {
-    width: 30em;  /* Set fixed width */
-    height: 18em; /* Set fixed height */
+.OJC1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
 }
 
-/* Position the prev/next buttons */
-.prev, .next {
-
-    background-color: lightgray;
-    color: black; /* Button text color */
-    border: none; /* Remove borders */
-    font-size: 1rem; /* Size of the arrow icon */
-    padding: 1em 1em; /* Padding to make the button larger */
-    z-index: 10; /* Make sure the buttons are above the images */
-    transition: background-color 5s ease; /* Smooth transition on hover */
+.year3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
 }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Darken background on hover */
+.hr3 {
+    border: 0.125rem solid green;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
 }
 
-    /* Positioning the 'Prev' button */
-    .prev {
-        transform: translateY(-10em);
-    }
+.DPRO1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
+}
 
-    /* Positioning the 'Next' button */
-    .next {
-        transform: translatey(-10em) translatex(30.7em);
-        right: auto;
+.year4 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+}
 
-    }
+.hr4 {
+    border: 0.125rem solid gold;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
+}
+
+.OC1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
+}
+
+.year5 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.hr5 {
+    border: 0.125rem solid green;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
+}
+
+.OCC1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
+}
+
+.year6 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+    transform: translateY(0rem);
+}
+
+.hr6 {
+    border: 0.125rem solid green;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
+}
+
+.hs2-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10rem;
+  margin-top: 2rem;
+}
+
+/* This puts the image collage on the left */
+.image-collage {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+}
+
+.base-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.overlay-img {
+  position: absolute;
+  bottom: -10rem;
+  right: -10rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Keep your existing HS2 style but make it flexible */
+.HS2 {
+  flex: 1;
+  text-align: justify;
+  color: white;
+  opacity: 0.7;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+
+.HS1 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
+}
+
+.HS2 {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    max-width: 95%;
+    margin: 1.25rem 2rem;
+    margin-bottom: 8rem;
+    transform: translateY(5rem);
+    text-align: justify;
+    color: white;
+    opacity: 0.7;
+}
+
+.ACCRDTTNS {
+    text-align: center;
+    transform: translateY(1rem);
+}
+
+.HS3 {
+    position: relative;
+    top: 5.625rem; /* 90px */
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    line-height: 1.3rem;
+    margin-bottom: 5rem;
+    text-align: justify;
+    align-items: center;
+    text-indent: 2rem;
+    max-width: 80rem;
+    left: 1rem;
+}
+
+.hr7 {
+    border: 0.125rem solid green;
+    position: relative;
+    bottom: -3rem;
+    width: 50rem;
+    margin: auto;
+    margin-bottom: 6rem;
+}
+
+/* Year Section Styling */
+.year-section {
+    background-color: transparent;
+    padding: 0.625rem; /* 10px */
+    border-radius: 0.3125rem; /* 5px */
+    padding-bottom: 5rem;
+}
