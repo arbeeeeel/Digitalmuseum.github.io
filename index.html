@@ -6,7 +6,7 @@
   <meta name="description" content="Welcome to our homepage." />
   <title>Digital Museum</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css" />
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="css/index.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
   <style>
@@ -134,25 +134,22 @@
 <body>
   <main>
     <!-- NAVIGATION BAR -->
-    <nav>
-      <div class="logo">
-        <img src="logo.png" alt="Logo" />
-      </div>
-
-      <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="Logo" />
   </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#video">Video</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="testing.html">Tour</a></li>
-        <li><a href="collection.html">Collection</a></li>
-        <li><a href="year1">Exhibit and Achievements</a></li>
-      </ul>
-    </nav>
+
+  <div class="hamburger" id="hamburger">&#9776;</div> <!-- ☰ icon -->
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="testing.html">Tour</a></li>
+    <li><a href="collection.html">Collection</a></li>
+    <li><a href="#year1">Exhibit and Achievements</a></li>
+  </ul>
+</nav>
 
     <!-- BANNER -->
     <div class="top-banner">
@@ -322,10 +319,9 @@
   </footer>
 
   <script>
-    window.addEventListener("scroll", () => {
-      document.querySelector("nav").classList.toggle("scrolled", window.scrollY > 50);
-    });
-
+ window.addEventListener("scroll", () => {
+    document.querySelector("nav").classList.toggle("scrolled", window.scrollY > 50);
+  });
 
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
